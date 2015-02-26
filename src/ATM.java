@@ -24,8 +24,8 @@ public class ATM extends JFrame implements ActionListener{
 	private int countNotes200 = 4;
 	private int countNotes100 = 7;
 	private int countNotes50 = 10;
-	int MAX_BALANCE = 3000, b;
-	private int wid, addNote;
+	int MAX_BALANCE = 3000;
+	private int wid, addNote, b;
 	private JButton addNotes, getCash, getBalance, getQuantity;
 	private JLabel label;
 
@@ -150,7 +150,7 @@ public class ATM extends JFrame implements ActionListener{
 								 if(b == 500){
 								JOptionPane.showMessageDialog(null, "Quantity of '500 notes' is " + 1 + " item");
 							    }
-								else if(b >= 1000){
+								else if (b > 500){
 									JOptionPane.showMessageDialog(null, "Quantity of '500 notes' is " + getCountNotes500() + " items");
 								}
 								}
@@ -239,7 +239,7 @@ public class ATM extends JFrame implements ActionListener{
 								if(b == 450){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 9+ " items");
 								    }
-								else if(b >= 1000){
+								else{
 								JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + getCountNotes50() + " items");
 							} 
 							
