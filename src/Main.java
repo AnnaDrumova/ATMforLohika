@@ -23,12 +23,9 @@ public class Main {
 		
 		SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-				try {
             	atm.makeATMGui();
                 atm.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+
             }
         });
 

@@ -14,6 +14,7 @@ enum Note{
   
 }
 
+    
 public class ATM extends JFrame implements ActionListener{
 	private Note notes500 = Note.notes500;
 	private Note notes200 = Note.notes200;
@@ -23,10 +24,11 @@ public class ATM extends JFrame implements ActionListener{
 	private int countNotes200 = 4;
 	private int countNotes100 = 7;
 	private int countNotes50 = 10;
+	int MAX_BALANCE = 3000;
 	private int wid, addNote;
-	private int b = 3000;
 	private JButton addNotes, getCash, getBalance, getQuantity;
 	private JLabel label;
+
 	
 	public int getCountNotes500() {
 		return countNotes500;
@@ -64,13 +66,15 @@ public class ATM extends JFrame implements ActionListener{
 	public ATM() {
         this.setTitle("ATM Admin");
         this.setLayout(new GridLayout(1, 2));
-        this.setSize(990, 200);
+        this.setSize(1000, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 	
 	public void makeATMGui(){	       
         label = new JLabel();        
 		add(label);		
+		label.setFont(new Font("Tahoma", Font.BOLD, 16));
+		label.setHorizontalAlignment(SwingConstants.CENTER);
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(4, 1));
 		addNotes = new JButton("Add notes");
@@ -92,26 +96,20 @@ public class ATM extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		
+	
 		if(source == addNotes){
 		
 		addNote = Integer.parseInt(JOptionPane.showInputDialog(null, "Please add notes divisible by 50",
 					"ATM",JOptionPane.INFORMATION_MESSAGE));
 		
-			if((b + addNote)<3000&&b%50==0&&(b + addNote)%50==0){
-			b = b + addNote;
-			label.setFont(new Font("Tahoma", Font.BOLD, 16));
-			label.setHorizontalAlignment(SwingConstants.CENTER);
-			label.setText("Notes have been successfully added");
+				if((MAX_BALANCE + addNote)<3000&&MAX_BALANCE%50==0&&(MAX_BALANCE + addNote)%50==0){
+					MAX_BALANCE = MAX_BALANCE + addNote;		
+				label.setText("Notes have been successfully added");
 			}
-			else if(b%50 == 0&&(b + addNote)>=3000){
-				label.setFont(new Font("Tahoma", Font.BOLD, 16));
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				label.setText("Operation cannot be performed, notes exceeds 3000 HRV");
+			else if(MAX_BALANCE%50 == 0&&(MAX_BALANCE + addNote)>=3000){
+				label.setText("Quantity of notes should not exceed 3000 HRV");
 			} 
 			else{
-				label.setFont(new Font("Tahoma", Font.BOLD, 16));
-				label.setHorizontalAlignment(SwingConstants.CENTER);
 				label.setText("Notes are not divisible by 50");
 			}
 
@@ -121,13 +119,11 @@ public class ATM extends JFrame implements ActionListener{
 	
 			wid = Integer.parseInt(JOptionPane.showInputDialog(null, "Please Enter Amount of Cash Withdrawals",
 					"ATM",JOptionPane.INFORMATION_MESSAGE));
-			if(wid<=b&&wid%50==0){
-				b = b - wid;
-				label.setFont(new Font("Tahoma", Font.BOLD, 16));
-				label.setHorizontalAlignment(SwingConstants.CENTER);
+			if(wid<=MAX_BALANCE&&wid%50==0){
+				MAX_BALANCE = MAX_BALANCE - wid;
 				label.setText("Please take Your money");
 			}
-			else if(wid<=b&&wid%50!=0){
+			else if(wid<=MAX_BALANCE&&wid%50!=0){
 				JOptionPane.showMessageDialog(null,"Please enter a number divisible by 50", "ATM", JOptionPane.INFORMATION_MESSAGE);
 			}
 		else{
@@ -136,9 +132,7 @@ public class ATM extends JFrame implements ActionListener{
 		}
 			
 			else if(source == getBalance){
-				label.setFont(new Font("Tahoma", Font.BOLD, 16));
-				label.setHorizontalAlignment(SwingConstants.CENTER);
-				label.setText("Your Balance is  " + b + " HVR");
+				label.setText("Your Balance is  " + MAX_BALANCE + " HVR");
 				}
 			
 			else if(source == getQuantity){
@@ -150,102 +144,102 @@ public class ATM extends JFrame implements ActionListener{
 							int num = Integer.parseInt(f);
 							if(num == 1){
 								
-								 if(b < 500){
+								 if(MAX_BALANCE < 500){
 										JOptionPane.showMessageDialog(null, "Quantity of '500 notes' is " + 0 + " item");
 									    }
-								 if(b == 500){
+								 if(MAX_BALANCE == 500){
 								JOptionPane.showMessageDialog(null, "Quantity of '500 notes' is " + 1 + " item");
 							    }
-								else if(b == 1000){
+								else if(MAX_BALANCE >= 1000){
 									JOptionPane.showMessageDialog(null, "Quantity of '500 notes' is " + getCountNotes500() + " items");
 								}
 								}
 							
 							if(num == 2){
 								
-								if(b < 200){
+								if(MAX_BALANCE < 200){
 									JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + 0 + " item");
 								    }
-								 if(b == 200){
+								 if(MAX_BALANCE >= 200 && MAX_BALANCE < 400){
 										JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + 1 + " item");
 									    }
-								 else if(b == 400){
+								 else if(MAX_BALANCE >= 400 && MAX_BALANCE < 600){
 										JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + 2 + " items");
 								    }
-								 else if(b == 600){
+								 else if(MAX_BALANCE >= 600 && MAX_BALANCE < 800){
 										JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + 3 + " items");
 								    }
 								 
-								 else if(b == 800){
+								 else if(MAX_BALANCE >= 800){
 								JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + getCountNotes200() + " items");
 							}
 							}
 							if(num == 3){
 								
-								if(b < 100){
+								if(MAX_BALANCE < 100){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 0 + " item");
 								    }
-								if(b == 100){
+								if(MAX_BALANCE >= 100 && MAX_BALANCE < 200){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 1 + " item");
 								    }
-								if(b == 200){
+								if(MAX_BALANCE >= 200 && MAX_BALANCE < 300){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 2 + " items");
 								    }
-								if(b == 300){
+								if(MAX_BALANCE >= 300 && MAX_BALANCE < 400){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 3 + " items");
 								    }
-								if(b == 400){
+								if(MAX_BALANCE >= 400 && MAX_BALANCE < 500){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 4 + " items");
 								}
 									
-								if(b == 500){
+								if(MAX_BALANCE >= 500 && MAX_BALANCE < 600){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 5 + " items");
 									    }	
-								if(b == 600){
+								if(MAX_BALANCE >= 600 && MAX_BALANCE < 700){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 6 + " items");
 									    }	
 								    
-								else if(b == 700){
+								else if(MAX_BALANCE >= 700){
 								JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + getCountNotes100() + " items");
 							}
 							}
 							if(num == 4){
 								
-								if(b == 50){
+								if(MAX_BALANCE == 50){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 1 + " item");
 								    }
-								if(b == 100){
+								if(MAX_BALANCE == 100){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 2 + " items");
 								    }
 								
-								if(b == 150){
+								if(MAX_BALANCE == 150){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 3 + " items");
 								    }
 								
-								if(b == 200){
+								if(MAX_BALANCE == 200){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 4 + " items");
 								    }
 								
-								if(b == 250){
+								if(MAX_BALANCE == 250){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 5 + " items");
 								    }
 								
-								if(b == 300){
+								if(MAX_BALANCE == 300){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 6 + " items");
 								    }
 								
-								if(b == 350){
+								if(MAX_BALANCE == 350){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 7 + " items");
 								    }
 								
-								if(b == 400){
+								if(MAX_BALANCE == 400){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 8 + " items");
 								    }
 								
-								if(b == 450){
+								if(MAX_BALANCE == 450){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 9+ " items");
 								    }
-								else if(b == 1000){
+								else if(MAX_BALANCE >= 1000){
 								JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + getCountNotes50() + " items");
 							} 
 							
