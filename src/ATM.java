@@ -23,7 +23,7 @@ public class ATM extends JFrame implements ActionListener{
 	private int countNotes500 = 2;
 	private int countNotes200 = 4;
 	private int countNotes100 = 7;
-	private int countNotes50 = 10;
+	private int countNotes50 = 10; 
 	int MAX_BALANCE = 3000;
 	private int wid, addNote, b;
 	private JButton addNotes, getCash, getBalance, getQuantity;
@@ -62,7 +62,7 @@ public class ATM extends JFrame implements ActionListener{
 	public void setCountNotes50(int countNotes50) {
 		this.countNotes50 = countNotes50;
 	}
-	
+
 	public ATM() {
         this.setTitle("ATM Admin");
         this.setLayout(new GridLayout(1, 2));
@@ -102,11 +102,11 @@ public class ATM extends JFrame implements ActionListener{
 		addNote = Integer.parseInt(JOptionPane.showInputDialog(null, "Please add notes divisible by 50",
 					"ATM",JOptionPane.INFORMATION_MESSAGE));
 		
-				if((MAX_BALANCE + addNote)<3000&&MAX_BALANCE%50==0&&(MAX_BALANCE + addNote)%50==0){
-					b = MAX_BALANCE + addNote;		
+		if((b + addNote)==3000 && (b + addNote)%50==0){
+					b = b + addNote;		
 				label.setText("Notes have been successfully added");
 			}
-			else if(MAX_BALANCE%50 == 0&&(MAX_BALANCE + addNote)>=3000){
+		if((b + addNote)>3000){
 				label.setText("Quantity of notes should not exceed 3000 HRV");
 			} 
 			else{
@@ -135,7 +135,7 @@ public class ATM extends JFrame implements ActionListener{
 				label.setText("Your Balance is  " + b + " HVR");
 				}
 			
-			else if(source == getQuantity){
+else if(source == getQuantity){
 				
 				String f = JOptionPane.showInputDialog(null, "Please select notes:\n"+"[1] '500 notes'\n"+
 						"[2] '200 notes'\n"+"[3] '100 notes'\n"+"[4] '50 notes'\n",
@@ -143,22 +143,20 @@ public class ATM extends JFrame implements ActionListener{
 							
 							int num = Integer.parseInt(f);
 							if(num == 1){
-								
 								 if(b < 500){
 										JOptionPane.showMessageDialog(null, "Quantity of '500 notes' is " + 0 + " item");
 									    }
-								 if(b == 500){
+								 else if(b == 500){
 								JOptionPane.showMessageDialog(null, "Quantity of '500 notes' is " + 1 + " item");
 							    }
-								else if (b > 500){
+								else{
 									JOptionPane.showMessageDialog(null, "Quantity of '500 notes' is " + getCountNotes500() + " items");
 								}
 								}
 							
 							if(num == 2){
-								
 								if(b < 200){
-									JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + 0 + " item");
+									JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + 1 + " item");
 								    }
 								 if(b >= 200 && b < 400){
 										JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + 1 + " item");
@@ -170,36 +168,36 @@ public class ATM extends JFrame implements ActionListener{
 										JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + 3 + " items");
 								    }
 								 
-								 else if(b > 800){
+								 else{
 								JOptionPane.showMessageDialog(null, "Quantity of '200 notes' is " + getCountNotes200() + " items");
 							}
 							}
 							if(num == 3){
 								
 								if(b < 100){
-									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 0 + " item");
+									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 1 + " item");
 								    }
 								if(b >= 100 && b < 200){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 1 + " item");
 								    }
-								if(b >= 200 && b < 300){
+								else if(b >= 200 && b < 300){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 2 + " items");
 								    }
-								if(b >= 300 && b < 400){
+								else if(b >= 300 && b < 400){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 3 + " items");
 								    }
-								if(b >= 400 && b < 500){
+								else if(b >= 400 && b < 500){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 4 + " items");
 								}
 									
-								if(b >= 500 && b < 600){
+								else if(b >= 500 && b < 600){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 5 + " items");
 									    }	
-								if(b >= 600 && b < 700){
+								else if(b >= 600 && b < 700){
 									JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + 6 + " items");
 									    }	
 								    
-								else if(b >= 700){
+								else{
 								JOptionPane.showMessageDialog(null, "Quantity of '100 notes' is " + getCountNotes100() + " items");
 							}
 							}
@@ -208,35 +206,35 @@ public class ATM extends JFrame implements ActionListener{
 								if(b == 50){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 1 + " item");
 								    }
-								if(MAX_BALANCE == 100){
+								if(b == 100){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 2 + " items");
 								    }
 								
-								if(b == 150){
+								else if(b == 150){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 3 + " items");
 								    }
 								
-								if(b == 200){
+								else if(b == 200){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 4 + " items");
 								    }
 								
-								if(b == 250){
+								else if(b == 250){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 5 + " items");
 								    }
 								
-								if(b == 300){
-										JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 6 + " items");
+								else if(b == 300){
+									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 6 + " items");
 								    }
 								
-								if(b == 350){
+								else if(b == 350){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 7 + " items");
 								    }
 								
-								if(b == 400){
+								else if(b == 400){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 8 + " items");
 								    }
 								
-								if(b == 450){
+								else if(b == 450){
 									JOptionPane.showMessageDialog(null, "Quantity of '50 notes' is " + 9+ " items");
 								    }
 								else{
@@ -246,4 +244,5 @@ public class ATM extends JFrame implements ActionListener{
 							}
 			}
 	}
-}
+ }
+	
